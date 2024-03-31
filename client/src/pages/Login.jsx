@@ -22,6 +22,7 @@ const Login = () => {
         try {
             dispatch(showLoading())
             const res = await axios.post('http://localhost:3002/user/login',data)
+            window.location.reload();
             dispatch(hideLoading())
             if(res.data.success){
                 localStorage.setItem("token",res.data.token);

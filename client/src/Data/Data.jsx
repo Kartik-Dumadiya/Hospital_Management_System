@@ -14,10 +14,6 @@ export const userMenu = [
     {
         name:"Profile",
         path:"/profile"
-    },
-    {
-        name: "Logout",
-        path:"/logout",
     }
 ];
 
@@ -38,9 +34,5 @@ export const adminMenu = [
     {
         name:"Profile",
         path:"/profile",
-    },
-    {
-        name: "Logout",
-        path:"/logout",
     }
 ];

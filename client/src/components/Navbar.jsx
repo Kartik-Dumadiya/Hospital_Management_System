@@ -1,13 +1,21 @@
 import React from 'react';
-import { Link , useLocation} from 'react-router-dom';
+import { Link , useNavigate, useLocation} from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import { adminMenu, userMenu } from '../Data/Data';
+import { message } from 'antd';
 
-const Navbar = ({children}) => {
+const Navbar = () => {
+  const navigate = useNavigate();
   let sty = "px-4 cursor-pointer ease-in duration-200 h-full flex items-center border-y-4 border-[#28328C] hover:border-orange-400";
   const {user} = useSelector(state => state.user);
   const location = useLocation();
 
+  // logout function
+  const handleLogout = ()=>{
+    localStorage.clear();
+    message.success("Logout Sucessfully");
+    navigate('/login');
+  }
   const menuBar = user?.isAdmin ? adminMenu : userMenu;
   return (
     <div className=' w-full bg-[#28328C] h-16 flex items-center justify-between'>
@@ -26,10 +34,16 @@ const Navbar = ({children}) => {
               })}
           </div>
         </div>
-        { user ? <Link to="/profile" className='cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 mr-3 hover:bg-orange-100 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
-                      <img src="../../media/user_profile.png" alt="Name" className='h-[20px] w-[20px]' />
-                      <p>{user.name}</p>
-                  </Link> : 
+        { user ? <div className='flex gap-3 mr-3'>
+                    <Link to="/login" onClick={handleLogout} className='cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 hover:bg-red-500 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
+                        <img src="../../media/logout_.png" className='h-[20px] w-[20px]' />
+                        <p>Logout</p>
+                    </Link>
+                    <Link to="/profile" className='cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 hover:bg-orange-100 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
+                        <img src="../../media/user_profile.png" alt="Name" className='h-[20px] w-[20px]' />
+                        <p>{user.name}</p>
+                    </Link>
+                  </div> : 
           <Link to="/login/patient" className=' cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 mr-3 hover:bg-orange-100 duration-200 ease-in'>
               <img src="..\media\Profile_logo.png" alt="Logo" className=' h-6'/>
               <p>Login/Register</p>
