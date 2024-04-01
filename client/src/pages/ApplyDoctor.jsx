@@ -1,11 +1,11 @@
-import React from 'react'
-import Na
-const ApplyDoctor = () => {
-  return (
-    <div>
+// import React from 'react'
+// import Na
+// const ApplyDoctor = () => {
+//   return (
+//     <div>
       
-    </div>
-  )
-}
+//     </div>
+//   )
+// }
 
-export default ApplyDoctor
+// export default ApplyDoctor
