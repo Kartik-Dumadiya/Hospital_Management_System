@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from 'react-hook-form';
+import { useForm , Controller} from 'react-hook-form';
 import Navbar from '../components/Navbar';
 import { TimePicker } from 'antd';
 
@@ -9,6 +9,7 @@ const ApplyDoctor = () => {
         register,
         handleSubmit,
         watch,
+        control,
         formState: { errors, isSubmitting },
     } = useForm();
 
@@ -168,22 +169,26 @@ const ApplyDoctor = () => {
                         {errors.feesPerCunsaltation && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.feesPerCunsaltation.message}</div>}
                     </div>
                 </div>
-                {/* <div className='flex gap-4 w-full justify-between'>
+                <div className='flex gap-4 w-full justify-between'>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="timing" className='flex gap-1'><p className=' text-red-600'>*</p>Timing</label>
                         <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <TimePicker.RangePicker id='timing' className='w-full h-full' format="HH:mm" name='timing'
-                                {...register("timing", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    },
-                                })}
-                            /> 
+                        <Controller
+                            control={control} 
+                            name="timing"
+                            render={({ field }) => (
+                            <TimePicker.RangePicker
+                                className='w-full h-full'
+                                format="HH:mm"
+                                onChange={field.onChange}
+                                value={field.value} 
+                            />
+                            )}
+                        />
                         </div>
                         {errors.timing && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.timing.message}</div>}
                     </div>
-                </div> */}
+                </div>
                 <div className='flex w-full justify-center'>
                     <button type='submit' className=' bg-orange-400 px-9 py-2 rounded-md font-mono hover:bg-orange-500'>Save</button>
                 </div>
