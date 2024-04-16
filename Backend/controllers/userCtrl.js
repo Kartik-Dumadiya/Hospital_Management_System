@@ -72,6 +72,8 @@ const authController = async(req, res) => {
 //     res.status(200).send("hi kartik");
 // }
 
+
+//apply doctor controller
 const applyDoctorController = async(req, res) => {
     try {
         const newDoctor = await doctorModel({...req.body,status : 'pending'})
@@ -101,4 +103,54 @@ const applyDoctorController = async(req, res) => {
         })
     }
 }
-export {loginController, registerController, authController, applyDoctorController};
+
+
+// notification ctrl
+const getAllNotificationController = async (req,res) => {
+    try {
+        const user = await userModel.findOne({_id:req.body.userId})
+        const seenNotification = user.seenNotification;
+        const notification = user.notification;
+        seenNotification.push(...notification)
+        user.notification = [];
+        user.seenNotification = notification;
+        const updatedUser = await user.save();
+        res.status(200).send({
+            success:true,
+            message: "all notification marked as read",
+            data : updatedUser, 
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            message: 'Error in notification',
+            success : false,
+            error
+        })
+    }
+}
+
+
+// delete notifications
+const deleteAllNotificationController = async (req,res) => {
+    try {
+        const user = await userModel.findOne({ _id : req.body.userId })
+        user.notification = [];
+        user.seenNotification = [];
+        const updatedUser = await user.save();
+        updatedUser.password = undefined;
+        res.status(200).send({
+            success: true,
+            message : "Notification Deleted Successfully",
+            data : updatedUser,
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).send({
+            success: false,
+            message : 'unable to delete all notification',
+            error
+        })
+    }
+}
+export {loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController};

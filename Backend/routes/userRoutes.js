@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { registerController, loginController, authController, applyDoctorController} from '../controllers/userCtrl.js'
+import { registerController, loginController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController} from '../controllers/userCtrl.js'
 import authMiddleware from '../middlewares/authMiddleware.js';
 
 //router object
@@ -19,4 +19,11 @@ router.post('/getUserData', authMiddleware, authController)
 
 // Apply Doctor || Post
 router.post('/apply-doctor', authMiddleware, applyDoctorController) 
+
+// Notification Doctor || Post
+router.post('/get-all-notification', authMiddleware, getAllNotificationController) 
+
+// Delete Notification Doctor || Post
+router.post('/get-all-notification', authMiddleware, deleteAllNotificationController) 
+
 export default router;
