@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { registerController, loginController, authController} from '../controllers/userCtrl.js'
+import { registerController, loginController, authController, applyDoctorController} from '../controllers/userCtrl.js'
 import authMiddleware from '../middlewares/authMiddleware.js';
 
 //router object
@@ -13,8 +13,10 @@ router.post('/login',loginController)
 router.post('/register',registerController);
 
 // router.get('/register', ty);
-// Auth || Post
 
+// Auth || Post
 router.post('/getUserData', authMiddleware, authController)
 
+// Apply Doctor || Post
+router.post('/apply-doctor', authMiddleware, applyDoctorController) 
 export default router;

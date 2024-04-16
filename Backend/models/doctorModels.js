@@ -39,6 +39,10 @@ const doctorSchema = new mongoose.Schema({
         type : Number,
         require : [true, 'fee is required']
     },
+    status : {
+        type : String,
+        default : 'pending'
+    },
     timing : {
         type : Object,
         require : [true, 'work timing is required']
@@ -47,4 +51,4 @@ const doctorSchema = new mongoose.Schema({
 { timestamps : true }
 );
 
-module.exports = mongoose.model("Doctor",DoctorSchema);
+module.exports = mongoose.model("doctors",DoctorSchema);

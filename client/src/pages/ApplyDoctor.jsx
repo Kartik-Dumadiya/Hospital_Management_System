@@ -1,10 +1,17 @@
 import React from 'react';
 import { useForm , Controller} from 'react-hook-form';
 import Navbar from '../components/Navbar';
-import { TimePicker } from 'antd';
+import { TimePicker, message } from 'antd';
+import { useSelector, useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { showLoading, hideLoading } from '../redux/features/alertSlice';
+import axios from 'axios';
 
 
 const ApplyDoctor = () => {
+    const {user} = useSelector(state => state.user)
+    const navigate = useNavigate();
+    const dispatch = useDispatch();
     const {
         register,
         handleSubmit,
@@ -14,7 +21,25 @@ const ApplyDoctor = () => {
     } = useForm();
 
     const onSubmit = async(data) => {
-        console.log(data);
+        try {
+            dispatch(showLoading())
+            const res = await axios.post('/user/apply-doctor', {...values, userId:user._id},{
+                headers:{
+                    Authorization: `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            dispatch(hideLoading())
+            if(res.data.success){
+                message.success(res.data.success)
+                navigate('/')
+            }else{
+                message.error(res.data.success)
+            }
+        } catch (error) {
+            dispatch(hideLoading());
+            console.log(error);
+            message.error('Something went Wrong ')
+        }
     }
   return (
     <>
@@ -36,7 +61,7 @@ const ApplyDoctor = () => {
                                 })}
                             />
                         </div>
-                        {errors.firstName && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.firstName.message}</div>}
+                        {errors.firstName && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.firstName.message}</div>}
                     </div>
 
                     <div className='flex flex-col gap-1'>
@@ -51,7 +76,7 @@ const ApplyDoctor = () => {
                                 })}
                             />
                         </div>
-                        {errors.lastName && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.lastName.message}</div>}
+                        {errors.lastName && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.lastName.message}</div>}
                     </div>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="mobile" className='flex gap-1'><p className=' text-red-600'>*</p>Mobile Number</label>
@@ -73,7 +98,7 @@ const ApplyDoctor = () => {
                                 })}
                             />
                         </div>
-                        {errors.mobile && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.mobile.message}</div>}
+                        {errors.mobile && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.mobile.message}</div>}
                     </div>
                 </div>
                 <div className='flex gap-4 w-full justify-between'>
@@ -89,7 +114,7 @@ const ApplyDoctor = () => {
                                 })}
                             />
                         </div>
-                        {errors.email && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.email.message}</div>}
+                        {errors.email && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.email.message}</div>}
                     </div>
 
                     <div className='flex flex-col gap-1'>
@@ -104,7 +129,7 @@ const ApplyDoctor = () => {
                                 })}
                             />
                         </div>
-                        {errors.website && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.website.message}</div>}
+                        {errors.website && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.website.message}</div>}
                     </div>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="address" className='flex gap-1'><p className=' text-red-600'>*</p>Address</label>
@@ -118,7 +143,7 @@ const ApplyDoctor = () => {
                                 })}
                             />
                         </div>
-                        {errors.address && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.address.message}</div>}
+                        {errors.address && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.address.message}</div>}
                     </div>
                 </div>
 
@@ -137,7 +162,7 @@ const ApplyDoctor = () => {
                                 })}
                             />
                         </div>
-                        {errors.specialization && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.specialization.message}</div>}
+                        {errors.specialization && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.specialization.message}</div>}
                     </div>
 
                     <div className='flex flex-col gap-1'>
@@ -152,7 +177,7 @@ const ApplyDoctor = () => {
                                 })}
                             />
                         </div>
-                        {errors.experience && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.experience.message}</div>}
+                        {errors.experience && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.experience.message}</div>}
                     </div>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="feesPerCunsaltation" className='flex gap-1'><p className=' text-red-600'>*</p>Fees Per Cunsaltation</label>
@@ -166,25 +191,40 @@ const ApplyDoctor = () => {
                                 })}
                             />
                         </div>
-                        {errors.feesPerCunsaltation && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.feesPerCunsaltation.message}</div>}
+                        {errors.feesPerCunsaltation && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.feesPerCunsaltation.message}</div>}
                     </div>
                 </div>
                 <div className='flex gap-4 w-full justify-between'>
                     <div className='flex flex-col gap-1'>
                         <label htmlFor="timing" className='flex gap-1'><p className=' text-red-600'>*</p>Timing</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                        <Controller
-                            control={control} 
-                            name="timing"
-                            render={({ field }) => (
-                            <TimePicker.RangePicker
-                                className='w-full h-full'
-                                format="HH:mm"
-                                onChange={field.onChange}
-                                value={field.value} 
+                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-around items-center gap-5'>
+                            <Controller
+                                name="stime"
+                                control={control}
+                                defaultValue=""
+                                render={({ field }) => (
+                                    <input
+                                    className=' px-3 w-[40%]'
+                                    placeholder='Start Time'
+                                    type="time"
+                                    {...field}
+                                    />
+                                )}
                             />
-                            )}
-                        />
+                            -
+                            <Controller
+                                name="etime"
+                                control={control}
+                                defaultValue=""
+                                render={({ field }) => (
+                                    <input
+                                    className=' px-3 w-[40%]'
+                                    placeholder='End Time'
+                                    type="time"
+                                    {...field}
+                                    />
+                                )}
+                            />
                         </div>
                         {errors.timing && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.timing.message}</div>}
                     </div>
