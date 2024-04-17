@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import { registerController, loginController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookingAvailabilityController, bookeAppointmnetController, userAppointmentsController} from '../controllers/userCtrl.js'
+import { loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookeAppointmnetController, bookingAvailabilityController,userAppointmentsController } from '../controllers/userCtrl.js'
 import authMiddleware from '../middlewares/authMiddleware.js';
 import { getAllDoctorController } from '../controllers/adminCtrl.js';
 

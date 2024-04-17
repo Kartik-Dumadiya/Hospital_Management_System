@@ -16,7 +16,30 @@ const Navbar = () => {
     message.success("Logout Sucessfully");
     navigate('/login');
   }
-  const menuBar = user?.isAdmin ? adminMenu : userMenu;
+
+  //=============doctorMenu====================
+ const doctorMenu = [
+    {
+        name: "Home",
+        path: "/",
+    },
+    {
+        name: "Appointments",
+        path: "/appointments",
+    },
+    {
+        name:"Profile",
+        path:`/doctor/profile/${user?._id}`,
+    }
+];
+
+  //=============doctorMenu====================
+
+  const menuBar = user?.isAdmin 
+  ? adminMenu : 
+  user?.isDoctor 
+  ? doctorMenu 
+  : userMenu;
   return (
     <div className=' w-full bg-[#28328C] h-16 flex items-center justify-between'>
         <Link to="\" className=' cursor-pointer bg-[#28328C] h-full flex justify-start relative w-[200px]'>

@@ -1,30 +1,30 @@
 import React from 'react';
-import { useForm , Controller} from 'react-hook-form';
 import Navbar from '../components/Navbar';
-import { TimePicker, message } from 'antd';
 import { useSelector, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { showLoading, hideLoading } from '../redux/features/alertSlice';
 import axios from 'axios';
-
+import {Col, Form, Input, Row, TimePicker, message} from 'antd'
+import moment from 'moment';
 
 const ApplyDoctor = () => {
+
     const {user} = useSelector(state => state.user)
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const {
-        register,
-        handleSubmit,
-        watch,
-        control,
-        formState: { errors, isSubmitting },
-    } = useForm();
 
-    const onSubmit = async(data) => {
+    //handle form 
+    const handleFinish = async(values) => {
         try {
-            console.log(data);
             dispatch(showLoading())
-            const res = await axios.post("http://localhost:3002/user/apply-doctor", {...data, userId:user._id},{
+            const res = await axios.post("http://localhost:3002/user/apply-doctor", 
+            {...values, 
+                userId:user._id,
+                timings:[
+                    moment(values.timings[0]).format("HH:mm"),
+                    moment(values.timings[1]).format("HH:mm"),
+                ],
+            },{
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -42,200 +42,85 @@ const ApplyDoctor = () => {
             message.error('Something went Wrong ')
         }
     }
+
   return (
-    <>
+      <>
         <Navbar/>
         <div className=' bg-[#ECF4FF] h-[600px] w-[1200px] m-auto rounded-2xl mt-9 shadow-lg shadow-black'>
             <div className='font-bold text-2xl text-center p-4 underline underline-offset-8'>Apply as Doctor</div>
-            <form /*method="POST"*/ className='mt-4 flex flex-col gap-4 mx-auto px-8' onSubmit={handleSubmit(onSubmit)}>
-                <div className=' text-2xl font-semibold'>Personal Details :</div>
-                <div className='flex gap-4 w-full justify-between'>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="fname" className='flex gap-1'><p className=' text-red-600'>*</p>First Name</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <input name='fname' id='fname' required type="text" placeholder='Your First name' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
-                                {...register("firstName", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    }
-                                })}
-                            />
-                        </div>
-                        {errors.firstName && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.firstName.message}</div>}
-                    </div>
+            <Form layout = "vertical" onFinish = {handleFinish} className='p-7'>
+                <div className=' text-2xl font-semibold mb-4'>Personal Details :</div>
+                <Row gutter={20} className='flex'>
+                    <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label = "First Name" name = "firstName" required rules = {[{required:true}]}>
+                        <Input type = "text" placeholder='your first name'></Input>
+                    </Form.Item>
+                    </Col>
 
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="lname" className='flex gap-1'><p className=' text-red-600'>*</p>Last Name</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <input name='lname' id='lname' required type="text" placeholder='Your Last name' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
-                                {...register("lastName", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    }
-                                })}
-                            />
-                        </div>
-                        {errors.lastName && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.lastName.message}</div>}
-                    </div>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="mobile" className='flex gap-1'><p className=' text-red-600'>*</p>Mobile Number</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <input name='mobile' id='mobile' type="number" placeholder='Your Mobile Number' className='w-[250px] h-full bg-[transparent] px-2 rounded-md remove-arrow' style={{ border: "none", outline: "none" }}
-                                {...register("mobile", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    },
-                                    // minLength :{
-                                    //     value : 10,
-                                    //     message : "*Fill proper mobile number.",
-                                    // },
-                                    // maxLength :{
-                                    //     value : 10,
-                                    //     message : "*Fill proper mobile number.",
-                                    // }
-                                })}
-                            />
-                        </div>
-                        {errors.mobile && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.mobile.message}</div>}
-                    </div>
-                </div>
-                <div className='flex gap-4 w-full justify-between'>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="email" className='flex gap-1'><p className=' text-red-600'>*</p>Email</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <input name='email' id='email' required type="email" placeholder='Your Email address' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
-                                {...register("email", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    }
-                                })}
-                            />
-                        </div>
-                        {errors.email && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.email.message}</div>}
-                    </div>
+                    <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label = "Last Name" name = "lastName" required rules = {[{required:true}]}>
+                        <Input type = "text" placeholder='your last name'></Input>
+                    </Form.Item>
+                    </Col>
 
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="website" className='flex gap-1'>Website</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <input name='website' id='website' required type="text" placeholder='Your Website' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
-                                {...register("website", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    }
-                                })}
-                            />
-                        </div>
-                        {errors.website && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.website.message}</div>}
-                    </div>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="address" className='flex gap-1'><p className=' text-red-600'>*</p>Address</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <input name='address' id='address' required type="text" placeholder='Your Address' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
-                                {...register("address", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    }
-                                })}
-                            />
-                        </div>
-                        {errors.address && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.address.message}</div>}
-                    </div>
-                </div>
+                    <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label = "Phone No" name = "mobile" required rules = {[{required:true}]}>
+                        <Input type = "text" placeholder='your contant no'></Input>
+                    </Form.Item>
+                    </Col>
+                </Row>
+                <Row gutter={20}>
+                    <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label = "Email" name = "email" required rules = {[{required:true}]}>
+                        <Input type = "email" placeholder='your email address'></Input>
+                    </Form.Item>
+                    </Col>
 
+                    <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label = "Website" name = "website" required rules = {[{required:true}]}>
+                        <Input type = "text" placeholder='your website'></Input>
+                    </Form.Item>
+                    </Col>
 
-                <div className=' text-2xl font-semibold'>Proffesional Details :</div>
-                <div className='flex gap-4 w-full justify-between'>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="specialization" className='flex gap-1'><p className=' text-red-600'>*</p>Specialization</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <input name='specialization' id='specialization' required type="text" placeholder='Your specialization' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
-                                {...register("specialization", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    }
-                                })}
-                            />
-                        </div>
-                        {errors.specialization && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.specialization.message}</div>}
-                    </div>
+                    <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label = "Address" name = "address" required rules = {[{required:true}]}>
+                        <Input type = "text" placeholder='your clinic address'></Input>
+                    </Form.Item>
+                    </Col>
+                </Row>
 
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="experience" className='flex gap-1'><p className=' text-red-600'>*</p>Experience</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <input name='experience' id='experience' required type="number" placeholder='Your experience in years' className='w-[250px] h-full bg-[transparent] px-2 rounded-md remove-arrow' style={{ border: "none", outline: "none" }}
-                                {...register("experience", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    }
-                                })}
-                            />
-                        </div>
-                        {errors.experience && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.experience.message}</div>}
-                    </div>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="feesPerCunsaltation" className='flex gap-1'><p className=' text-red-600'>*</p>Fees Per Cunsaltation</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                            <input name='feesPerCunsaltation' id='feesPerCunsaltation' type="number" placeholder='Your Fees Per Cunsaltation' className='w-[250px] h-full bg-[transparent] px-2 rounded-md remove-arrow' style={{ border: "none", outline: "none" }}
-                                {...register("feesPerCunsaltation", {
-                                    required: {
-                                        value: true,
-                                        message: "*This field is required.",
-                                    },
-                                })}
-                            />
-                        </div>
-                        {errors.feesPerCunsaltation && <div className=' ml-1 text-red-600 text-sm font-mono'>{errors.feesPerCunsaltation.message}</div>}
-                    </div>
-                </div>
-                <div className='flex gap-4 w-full justify-between'>
-                    <div className='flex flex-col gap-1'>
-                        <label htmlFor="timing" className='flex gap-1'><p className=' text-red-600'>*</p>Timing</label>
-                        <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-around items-center gap-5'>
-                            <Controller
-                                name="startTiming"
-                                control={control}
-                                defaultValue=""
-                                render={({ field }) => (
-                                    <input
-                                    className=' px-3 w-[40%]'
-                                    placeholder='Start Time'
-                                    type="time"
-                                    {...field}
-                                    />
-                                )}
-                            />
-                            -
-                            <Controller
-                                name="endTiming"
-                                control={control}
-                                defaultValue=""
-                                render={({ field }) => (
-                                    <input
-                                    className=' px-3 w-[40%]'
-                                    placeholder='End Time'
-                                    type="time"
-                                    {...field}
-                                    />
-                                )}
-                            />
-                        </div>
-                        {errors.timing && <div className=' ml-12 text-red-600 text-sm font-mono'>{errors.timing.message}</div>}
-                    </div>
-                </div>
+                <div className=' text-2xl font-semibold mb-4'>Personal Details :</div>
+                <Row gutter = {20}>
+                <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label =  "Specialization" name = "specialization" required rules = {[{required:true}]}>
+                        <Input type = "text" placeholder='your specialization'></Input>
+                    </Form.Item>
+                    </Col>
+                    <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label =  "Experience" name = "experience" required rules = {[{required:true}]}>
+                        <Input type = "text" placeholder='your experience'></Input>
+                    </Form.Item>
+                    </Col>
+
+                    <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label =  "Fees per consultation" name = "feesPerCunsaltation" required rules = {[{required:true}]}>
+                        <Input type = "text" placeholder='your fees'></Input>
+                    </Form.Item>
+                    </Col>
+
+                    <Col xs ={24} md = {24} lg = {8}>
+                    <Form.Item label =  "Timings" name = "timings" required rules = {[{required:true}]}>
+                        <TimePicker.RangePicker format = "HH:mm" />
+                    </Form.Item>
+                    </Col>
+                    
+                </Row>
                 <div className='flex w-full justify-center'>
-                    <button type='submit' className=' bg-orange-400 px-9 py-2 rounded-md font-mono hover:bg-orange-500'>Save</button>
+                        <button type='submit' className=' bg-orange-400 px-9 py-2 rounded-md font-mono hover:bg-orange-500'>Apply</button>
                 </div>
-            </form> 
+            </Form>
         </div>
-    </>
+      </>
   )
 }
 

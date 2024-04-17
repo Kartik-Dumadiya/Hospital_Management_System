@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react'
 import Navbar from '../../components/Navbar'
 import Footter from '../../components/Footter'
 import axios from 'axios';
-import { Table } from 'antd';
+import { Table, message } from 'antd';
 
 const Doctors = () => {
 
@@ -20,6 +20,27 @@ const Doctors = () => {
                 setDoctors(res.data.data);
             }
         } catch (error) {
+            console.log(error);
+        }
+    }
+
+    //hnadle Account
+    const handleAccountStatus = async(record, status) => {
+        try {
+            const res = await axios.post('http://localhost:3002/admin/changeAccountStatus',
+                {doctorId : record._id, userId : record.userId, status:status}, 
+                {
+                    headers:{
+                        Authorization: `Bearer ${localStorage.getItem("token")}`,
+                    },
+                }
+            );
+            if(res.data.success){
+                message.success(res.data.message);
+                window.location.reload();
+            }
+        } catch (error) {
+            message.error("Something went wrong.")
             console.log(error);
         }
     }
@@ -50,7 +71,7 @@ const Doctors = () => {
             render : (text,record) => (
                 <div className='flex'>
                     {record.status === 'pending' ? (
-                        <button className=' bg-green-500 text-white py-1 px-2 rounded-lg'>Approve</button>
+                        <button onClick={()=>{handleAccountStatus(record, "approved")}} className=' bg-green-500 text-white py-1 px-2 rounded-lg'>Approve</button>
                     ) : (
                         <button className=' bg-red-500 text-white py-1 px-2 rounded-lg'>Reject</button>
                     )}
