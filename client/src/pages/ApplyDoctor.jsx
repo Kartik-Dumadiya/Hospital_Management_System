@@ -22,8 +22,9 @@ const ApplyDoctor = () => {
 
     const onSubmit = async(data) => {
         try {
+            console.log(data);
             dispatch(showLoading())
-            const res = await axios.post('/user/apply-doctor', {...values, userId:user._id},{
+            const res = await axios.post("http://localhost:3002/user/apply-doctor", {...data, userId:user._id},{
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
                 }
@@ -199,7 +200,7 @@ const ApplyDoctor = () => {
                         <label htmlFor="timing" className='flex gap-1'><p className=' text-red-600'>*</p>Timing</label>
                         <div className='flex h-[40px] bg-[#ffffff] border-[2px] w-[320px] rounded m-auto justify-around items-center gap-5'>
                             <Controller
-                                name="stime"
+                                name="startTiming"
                                 control={control}
                                 defaultValue=""
                                 render={({ field }) => (
@@ -213,7 +214,7 @@ const ApplyDoctor = () => {
                             />
                             -
                             <Controller
-                                name="etime"
+                                name="endTiming"
                                 control={control}
                                 defaultValue=""
                                 render={({ field }) => (

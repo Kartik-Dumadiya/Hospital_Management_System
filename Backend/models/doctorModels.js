@@ -12,7 +12,7 @@ const doctorSchema = new mongoose.Schema({
         type : String,
         require : [true, 'last name is required']
     },
-    phone : {
+    mobile : {
         type : String,
         require : [true, 'phone no is required']
     },
@@ -43,8 +43,12 @@ const doctorSchema = new mongoose.Schema({
         type : String,
         default : 'pending'
     },
-    timing : {
-        type : Object,
+    startTiming : {
+        type : String,
+        require : [true, 'work timing is required']
+    },
+    endTiming : {
+        type : String,
         require : [true, 'work timing is required']
     },
 },

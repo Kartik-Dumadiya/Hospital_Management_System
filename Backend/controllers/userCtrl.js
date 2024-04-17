@@ -125,7 +125,7 @@ const getAllNotificationController = async (req,res) => {
         res.status(500).send({
             message: 'Error in notification',
             success : false,
-            error
+            error,
         })
     }
 }
@@ -135,6 +135,7 @@ const getAllNotificationController = async (req,res) => {
 const deleteAllNotificationController = async (req,res) => {
     try {
         const user = await userModel.findOne({ _id : req.body.userId })
+        
         user.notification = [];
         user.seenNotification = [];
         const updatedUser = await user.save();
