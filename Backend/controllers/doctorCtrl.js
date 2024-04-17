@@ -1,6 +1,7 @@
 import userModel from '../models/userModels.js'
 import doctorModel from '../models/doctorModels.js';
 
+
 const getDoctorInfoController = async(req,res) => {
     try {
         const doctor = await doctorModel.findOne({ userId : req.body.userId });
@@ -22,4 +23,4 @@ const getDoctorInfoController = async(req,res) => {
 
 const updateProfileController = async() => {}
 
-module.exports = { getDoctorInfoController , updateProfileController }
+export{ getDoctorInfoController , updateProfileController }

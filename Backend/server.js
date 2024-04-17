@@ -4,7 +4,9 @@ import morgan from 'morgan';
 import { config } from 'dotenv';
 import connectDB from './config/db.js';
 import cors from 'cors';
-import router from './routes/userRoutes.js';
+import userRouter from './routes/userRoutes.js';
+import adminRouter from './routes/adminRoutes.js';
+import doctorRouter from './routes/doctorRoutes.js';
 
 const app = express();
 //dotenv config
@@ -20,7 +22,10 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 //routes
-app.use('/user', router)
+app.use('/user', userRouter)
+app.use("/admin", adminRouter);
+app.use("/doctor", doctorRouter);
+
 
 //POrt
 const port = 3002;
