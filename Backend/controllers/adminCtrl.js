@@ -72,4 +72,4 @@ const changeAccountStatusController = async(req,res) => {
     }
 }
 
-export{ getAllUsersController, getAllDoctorController, changeAccountStatusController }
+export default { getAllUsersController, getAllDoctorController, changeAccountStatusController }
