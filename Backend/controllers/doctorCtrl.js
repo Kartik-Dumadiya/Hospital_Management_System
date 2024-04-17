@@ -110,14 +110,6 @@ const getDoctorByIdController = async (req, res) => {
     }
   };
   
-  module.exports = {
-    getDoctorInfoController,
-    updateProfileController,
-    getDoctorByIdController,
-    doctorAppointmentsController,
-    updateStatusController,
-  };
-
 export{ getDoctorInfoController , updateProfileController, getDoctorByIdController,
     doctorAppointmentsController,
     updateStatusController, }
