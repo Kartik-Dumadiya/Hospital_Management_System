@@ -1,5 +1,6 @@
 import userModel from "../models/userModels.js";
 import doctorModel from "../models/doctorModels.js";
+import appointmentModel from "../models/appointmentModel.js";
 
 const getDoctorInfoController = async (req, res) => {
   try {
