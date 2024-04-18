@@ -5,6 +5,9 @@ import {useParams} from "react-router-dom"
 const BookingPage = () => {
     const params = useParams();
     const [doctors, setDoctors] = useState([]);
+    const [data, setData ] = useState([]);
+    const [timings, setTimings] = useState()
+
     //login user data
     const getUserData = async () => {
         try {
@@ -40,9 +43,13 @@ const BookingPage = () => {
                         <p> Fees : {doctors.feesPerConsultaion} {doctors.lastName} </p>
                         <p> Timings{doctors.firstName} {doctors.lastName} </p>
                         <div>
-                            <DatePicker format = "DD-MM-YYYY"/>
-                            <TImePicker.RangePicker format = "HH:mm" />
+                            <DatePicker format = "DD-MM-YYYY" onChange = {(value) => setData(moment(value).format("DD-MM-YYYY"))} />
+                            <TimePicker.RangePicker format = "HH:mm" onChange = {(values) => setTimings([
+                                moment(values[0]).format("HH:mm"),
+                                moment(values[1]).format("HH:mm"),
+                            ])}/>
                             <button>Check Availability</button>  
+                            <button>Book Now</button>  
                         </div>
                     </div>
                 )}
