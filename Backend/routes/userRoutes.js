@@ -1,7 +1,6 @@
 import {Router} from 'express';
 import { loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookeAppointmnetController, bookingAvailabilityController,userAppointmentsController } from '../controllers/userCtrl.js'
 import authMiddleware from '../middlewares/authMiddleware.js';
-import { getAllDoctorController } from '../controllers/adminCtrl.js';
 
 //router object
 const router = Router();
@@ -16,7 +15,7 @@ router.post('/register',registerController);
 // router.get('/register', ty);
 
 // Auth || Post
-router.post('/getUserData', authMiddleware, authController)
+router.get('/getUserData', authMiddleware, authController)
 
 // Apply Doctor || Post
 router.post('/apply-doctor', authMiddleware, applyDoctorController) 
