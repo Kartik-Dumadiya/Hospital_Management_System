@@ -2,6 +2,8 @@ import userModel from '../models/userModels.js'
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import doctorModel from '../models/doctorModels.js';
+import appointmentModel from '../models/appointmentModel.js';
+
 
 //register callback
 const registerController = async (req, res) => {
@@ -92,7 +94,7 @@ const applyDoctorController = async (req, res) => {
         await userModel.findByIdAndUpdate(adminUser._id, { notification })
         res.status(201).send({
             success: true,
-            message: 'Doctor Accound Applied Successdully.'
+            message: 'Doctor Accoun Applied Successdully.'
         })
     } catch (error) {
         console.log(error);
@@ -184,7 +186,7 @@ const bookeAppointmnetController = async (req, res) => {
         const user = await userModel.findOne({ _id: req.body.doctorInfo.userId });
         user.notifcation.push({
             type: "New-appointment-request",
-            message: `A nEw Appointment Request from ${req.body.userInfo.name}`,
+            message: `A new Appointment Request from ${req.body.userInfo.name}`,
             onCLickPath: "/user/appointments",
         });
         await user.save();
