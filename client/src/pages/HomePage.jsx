@@ -1,25 +1,30 @@
-import React,{useEffect} from 'react';
+import React,{useEffect, useState} from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footter from '../components/Footter';
 import homepg from "../../media/Homepg.svg";
 import { Link } from 'react-router-dom';
+import { Row } from 'antd';
+import DoctorList from '../components/DoctorList';
 
 const HomePage = () => {
   let tag_style = "h-[360px] w-[320px] rounded-lg px-3 text-center bg-slate-200 flex flex-col";
   let tag_text = "font-bold text-[#2B2A29] text-xl leading-10";
 
+  const [doctors, setDoctors] = useState([])
   //login user data
   const getUserData = async() => {
     try {
-      const res = await axios.post("http://localhost:3002/user/getUserdata",{}, {
+      const res = await axios.post("http://localhost:3002/user/getAllDoctors",{},{
         headers :{
-          Authorization : "Bearer " + localStorage.getItem("token"),
+          Authorization : `Bearer ${localStorage.getItem("token")}`,
         }
-      }) 
+      }) ;
+      if( res.data.success) {
+        setDoctors(res.data.data);
+      }
     } catch (error) {
       console.log(error)
-
     }
   }
 
@@ -39,6 +44,16 @@ const HomePage = () => {
                     Book Appointment Now !
                 </Link>
             </div>
+       </div>
+       <div className='w-[89%] mx-auto bg-slate-200 rounded-lg mt-3'>
+          <p className='w-full text-center text-4xl font-bold font-sans leading-[3.5rem] text-[#2B2A29] border-b border-slate-400'>Available Doctors</p>
+          <Row className='flex gap-5 py-6 justify-center items-center overflow-auto'>
+              {
+                doctors && doctors.map( doctor => (
+                  <DoctorList doctor={doctor}/>
+                ))
+              }
+          </Row>
        </div>
        <div className='flex flex-col'>
             <div className='p-6 m-auto w-[500px] text-center'>

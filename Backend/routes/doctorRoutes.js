@@ -11,16 +11,15 @@ doctorRouter.post('/getDoctorInfo',authMiddleware,getDoctorInfoController);
 doctorRouter.post("/updateProfile", authMiddleware, updateProfileController);
 
 //POST  GET SINGLE DOC INFO
-doctorRouter.post("/getDoctorById", authMiddleware, getDoctorByIdController);
+doctorRouter.post("/getDoctorById", getDoctorByIdController);
 
 //GET Appointments
 doctorRouter.get(
   "/doctor-appointments",
-  authMiddleware,
   doctorAppointmentsController
 );
 
 //POST Update Status
-doctorRouter.post("/update-status", authMiddleware, updateStatusController);
+doctorRouter.post("/update-status", updateStatusController);
 
 export default doctorRouter;

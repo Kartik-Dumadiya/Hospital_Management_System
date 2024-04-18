@@ -1,7 +1,6 @@
 import {Router} from 'express';
-import { loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookeAppointmnetController, bookingAvailabilityController,userAppointmentsController } from '../controllers/userCtrl.js'
+import { loginController, registerController, authController, applyDoctorController, getAllNotificationController, deleteAllNotificationController, getAllDoctorsController, bookAppointmentController, bookingAvailabilityController,userAppointmentsController } from '../controllers/userCtrl.js'
 import authMiddleware from '../middlewares/authMiddleware.js';
-import { getAllDoctorController } from '../controllers/adminCtrl.js';
 
 //router object
 const router = Router();
@@ -31,7 +30,7 @@ router.post('/delete-all-notification', authMiddleware, deleteAllNotificationCon
 router.post('/getAllDoctors', authMiddleware, getAllDoctorsController) 
 
 //BOOK APPOINTMENT
-router.post("/book-appointment", authMiddleware, bookeAppointmnetController);
+router.post("/book-appointment", bookAppointmentController);
 
 //Booking Avliability
 router.post(
@@ -41,6 +40,6 @@ router.post(
 );
 
 //Appointments List
-router.get("/user-appointments", authMiddleware, userAppointmentsController);
+router.get("/user-appointments", userAppointmentsController);
 
 export default router;
