@@ -38,7 +38,6 @@ const getAllDoctorController = async (req,res) => {
 }
 
 // doctor account status
-// doctor account status
 const changeAccountStatusController = async(req,res) => {
     try {
         const { doctorId, status } = req.body;
@@ -66,6 +65,7 @@ const changeAccountStatusController = async(req,res) => {
         });
     }
 };
+// doctor account status
 
 
 export { getAllUsersController, getAllDoctorController, changeAccountStatusController }

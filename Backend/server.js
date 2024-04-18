@@ -22,7 +22,7 @@ app.use(express.json())
 app.use(morgan('dev'))
 
 //routes
-app.use('/user', userRouter)
+app.use("/user", userRouter)
 app.use("/admin", adminRouter);
 app.use("/doctor", doctorRouter);
 
