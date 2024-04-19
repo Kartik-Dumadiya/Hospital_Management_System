@@ -70,13 +70,11 @@ function App() {
               </ProtectedRoute>
             }/>
             <Route path='/appointments' element={
-
                   <Appointments />
-                
             }/>
-            {/* <Route path='/doctor-appointments' element={
-                  // <doctorappointments />
-            }/> */}
+            <Route path='/doctor-appointments' element={
+                  <doctorappointments />
+            }/>
             
         </Routes>
       }
