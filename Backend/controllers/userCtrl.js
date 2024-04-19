@@ -47,8 +47,8 @@ const loginController = async (req, res) => {
 
 const authController = async (req, res) => {
     try {
-        const user = await userModel.findOne({ _id: req.body.userId})
-        // user.password = undefined;0
+        const user = await userModel.findById({ _id: req.body.userId })
+        user.password = undefined;
         if (!user) {
             return res.status(200).send({
                 message: 'User not found',
@@ -57,15 +57,10 @@ const authController = async (req, res) => {
         } else {
             res.status(200).send({
                 success: true,
-                // data: user,
-                data : {
-                    name : user.name,
-                    email : user.email,
-                }
+                data: user,
             })
         }
     } catch (error) {
-        console.log("hi ");
         console.log(error);
         res.status(500).send({
             message: 'Auth Error',
@@ -74,6 +69,11 @@ const authController = async (req, res) => {
         })
     }
 }
+// const ty = async(req,res) => {
+//     console.log("heloo");
+//     res.status(200).send("hi kartik");
+// }
+
 
 //apply doctor controller
 const applyDoctorController = async (req, res) => {
