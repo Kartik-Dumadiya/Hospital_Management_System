@@ -25,7 +25,7 @@ const Navbar = () => {
     },
     {
         name: "Appointments",
-        path: "/appointments",
+        path: "/doctor-appointments",
     },
     {
         name:"Profile",

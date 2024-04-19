@@ -10,6 +10,7 @@ export default async(req, res, next) => {
                     success : false
                 })
             }else {
+                // console.log(decode);
                 req.body.userId = decode.id
                 next();
             }

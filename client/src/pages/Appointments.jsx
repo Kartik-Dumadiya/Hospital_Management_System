@@ -32,18 +32,18 @@ const Appointments = () => {
             title : "ID",
             dataIndex: "_id",
         },
-        {
-            title: "Name",
-            dataIndex : "name",
-            render: (text, record) => (
-                <span>
-                    {record.doctorId.firstName} {record.doctorId.lastName}
-                </span>
-            )
-        },
+        // {
+        //     title: "Name",
+        //     dataIndex : "name",
+        //     render: (text, record) => (
+        //         <span>
+        //             {record.doctorId.firstName} {record.doctorId.lastName}
+        //         </span>
+        //     )
+        // },
         // {
         //     title: "Phone",
-        //     dataIndex : "phone",
+        //     dataIndex : "mobile",
         //     render: (text, record) => (
         //         <span>
         //             {record.doctorInfo.phone} 
@@ -62,7 +62,7 @@ const Appointments = () => {
         },
         {
             title: "Status",
-            dataIndex : "date",
+            dataIndex : "status",
         }
     ]
     return (

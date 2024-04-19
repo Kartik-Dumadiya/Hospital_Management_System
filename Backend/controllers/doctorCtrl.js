@@ -64,8 +64,9 @@ const getDoctorByIdController = async (req, res) => {
 };
 
 const doctorAppointmentsController = async (req, res) => {
+  // console.log(req.body.userId)
   try {
-    const doctor = await doctorModel.findOne({ userId: req.query.userId });
+    const doctor = await doctorModel.findOne({ userId: req.body.userId });
     const appointments = await appointmentModel.find({
       doctorId: doctor._id,
     });
@@ -75,7 +76,7 @@ const doctorAppointmentsController = async (req, res) => {
       data: appointments,
     });
   } catch (error) {
-    console.log(error);
+    // console.log(error);
     res.status(500).send({
       success: false,
       error,

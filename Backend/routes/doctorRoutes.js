@@ -16,6 +16,7 @@ doctorRouter.post("/getDoctorById", getDoctorByIdController);
 //GET Appointments
 doctorRouter.get(
   "/doctor-appointments",
+  authMiddleware,
   doctorAppointmentsController
 );
 

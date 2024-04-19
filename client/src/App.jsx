@@ -14,7 +14,7 @@ import Doctors from './pages/admin/Doctors'
 import Profile from './pages/doctor/Profile'
 import BookingPage from './pages/BookingPage';
 import Appointments from './pages/Appointments';
-import doctorappointments from './pages/doctor/doctorappointments';
+import DoctorAppointments from './pages/doctor/DoctorAppointments'
 
 function App() {
   const {loading} = useSelector(state => state.alerts)
@@ -73,7 +73,7 @@ function App() {
                   <Appointments />
             }/>
             <Route path='/doctor-appointments' element={
-                  <doctorappointments />
+                  <DoctorAppointments/>
             }/>
             
         </Routes>
