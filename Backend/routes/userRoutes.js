@@ -15,7 +15,7 @@ router.post('/register',registerController);
 // router.get('/register', ty);
 
 // Auth || Post
-router.post('/getUserData', authMiddleware, authController)
+router.get('/getUserData', authMiddleware, authController)
 
 // Apply Doctor || Post
 router.post('/apply-doctor', authMiddleware, applyDoctorController) 
