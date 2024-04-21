@@ -3,7 +3,6 @@ import Navbar from "../components/Navbar";
 import { useParams } from "react-router-dom";
 import { TimePicker, DatePicker, message } from "antd";
 import axios from "axios";
-import moment from "moment";
 import { useDispatch, useSelector } from "react-redux";
 import { hideLoading, showLoading } from "../redux/features/alertSlice";
 
@@ -57,19 +56,16 @@ const BookingPage = () => {
           },
         }
       );
-      console.log(time.format("HH:mm"));
-      console.log(date.format("DD-MM-YYYY"));
-      // localStorage.setItem("availableTime", time);
-      // localStorage.setItem("availableDate", date);
+
       dispatch(hideLoading());
       if (res.data.success) {
         message.success(res.data.message);
+        localStorage.setItem("isAvailable", true);
         return true;
-        // localStorage.setItem("isAvailable", true);
       } else {
         message.error(res.data.message);
+        localStorage.setItem("isAvailable", false);
         return false;
-        // localStorage.setItem("isAvailable", false);
       }
     } catch (error) {
       dispatch(hideLoading());
@@ -132,21 +128,19 @@ const BookingPage = () => {
             <div className="flex">
               <div className="font-bold text-lg">Doctor Name : </div>
               <div className="text-lg ml-2 tracking-wide">
-                {" "}
-                Dr. {doctors.firstName} {doctors.lastName}{" "}
+                Dr. {doctors.firstName} {doctors.lastName}
               </div>
             </div>
             <div className="flex">
               <div className="font-bold text-lg">Fees Per Consultation : </div>
               <div className="text-lg ml-2 tracking-wide">
-                ₹ {doctors.feesPerCunsaltation}{" "}
+                ₹ {doctors.feesPerCunsaltation}
               </div>
             </div>
             <div className="flex">
               <div className="font-bold text-lg">Timing : </div>
               <div className="text-lg ml-2 tracking-wide">
-                {" "}
-                {doctors.timings && doctors.timings[0]} -{" "}
+                {doctors.timings && doctors.timings[0]} - {" "}
                 {doctors.timings && doctors.timings[1]}
               </div>
             </div>
@@ -186,7 +180,6 @@ const BookingPage = () => {
                   onClick={handleBooking}
                   className=" bg-green-600 px-14 py-2 rounded-xl hover:bg-green-700 duration-100 ease-linear font-semibold text-white"
                 >
-                  {" "}
                   Book Now
                 </button>
               )}

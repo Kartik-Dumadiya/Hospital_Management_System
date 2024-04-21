@@ -55,7 +55,7 @@ const Navbar = () => {
         </div>
         { user ? <div className='flex gap-3 mr-3'>
                     <Badge count={user && user.notification.length} onClick={()=>{ navigate('/notification')}} className='cursor-pointer flex items-center bg-yellow-400 rounded-lg p-1 hover:bg-yellow-500 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
-                      <img src="././media/noti_icon.png" alt="Notification" className='h-[20px] w-[20px]'/>
+                      <img src="././media/noti_icon.png" alt="N" className='h-[20px] w-[20px]'/>
                     </Badge>
                     <Link to="/login" onClick={handleLogout} className='cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 hover:bg-red-500 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
                         <img src="../../media/logout_.png" className='h-[20px] w-[20px]' />
