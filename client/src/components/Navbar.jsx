@@ -35,11 +35,7 @@ const Navbar = () => {
 
   //=============doctorMenu====================
 
-  const menuBar = user?.isAdmin 
-  ? adminMenu : 
-  user?.isDoctor 
-  ? doctorMenu 
-  : userMenu;
+  const menuBar = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
   return (
     <div className=' w-full bg-[#28328C] h-16 flex items-center justify-between'>
         <Link to="\" className=' cursor-pointer bg-[#28328C] h-full flex justify-start relative w-[200px]'>
@@ -65,10 +61,10 @@ const Navbar = () => {
                         <img src="../../media/logout_.png" className='h-[20px] w-[20px]' />
                         <p>Logout</p>
                     </Link>
-                    <Link to="/profile" className='cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 hover:bg-orange-100 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
+                    <div className='cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 hover:bg-orange-100 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
                         <img src="../../media/user_profile.png" alt="Name" className='h-[20px] w-[20px]' />
                         <p>{user.name}</p>
-                    </Link>
+                    </div>
                   </div> : 
           <Link to="/login/patient" className=' cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 mr-3 hover:bg-orange-100 duration-200 ease-in'>
               <img src="..\media\Profile_logo.png" alt="Logo" className=' h-6'/>

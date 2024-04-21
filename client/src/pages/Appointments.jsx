@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import moment from "moment"
 import { Table } from "antd";
+import Navbar from "../components/Navbar";
+import Footter from "../components/Footter";
 
 
 const Appointments = () => {
@@ -29,36 +31,21 @@ const Appointments = () => {
 
     const columns = [
         {
-            title : "ID",
-            dataIndex: "_id",
-        },
-        // {
-        //     title: "Name",
-        //     dataIndex : "name",
-        //     render: (text, record) => (
-        //         <span>
-        //             {record.doctorId.firstName} {record.doctorId.lastName}
-        //         </span>
-        //     )
-        // },
-        // {
-        //     title: "Phone",
-        //     dataIndex : "mobile",
-        //     render: (text, record) => (
-        //         <span>
-        //             {record.doctorInfo.phone} 
-        //         </span>
-        //     ) 
-        // },
-        {
-            title: "Date & Time",
-            dataIndex : "date",
+            title: "Name",
+            dataIndex : "doctorName",
             render: (text, record) => (
-                <span>
-                    {moment(record.date).format('DD-MM-YYYY')} &nbsp;
-                    {moment(record.time).format('HH:mm')}
+                <span className=" text-lg">
+                    Dr. {record.doctorName}
                 </span>
-            ) 
+            )
+        },
+        {
+            title: "Date",
+            dataIndex : "date",
+        },
+        {
+            title: "Time",
+            dataIndex : "time",
         },
         {
             title: "Status",
@@ -66,14 +53,16 @@ const Appointments = () => {
         }
     ]
     return (
-        <div>
-            <h1>
-                Appointment List
-            </h1>
-            <Table columns = {columns} dataSource = {appointments}>
-
-            </Table>
-        </div>
+        <>
+            <Navbar/>
+            <div className='p-10 bg-slate-100 h-[650px] flex flex-col'>
+            <div className=' bg-slate-200 py-3 rounded-lg text-2xl text-center font-bold font-mono w-[1420px] mx-auto'>Appointment List</div>
+                <div className="p-5 mt-6 h-[500px]">
+                    <Table columns = {columns} dataSource = {appointments}/>
+                </div>
+            </div>
+            <Footter/>
+        </>
     );
 };
 

@@ -17,13 +17,11 @@ const ApplyDoctor = () => {
     const handleFinish = async(values) => {
         try {
             dispatch(showLoading())
+            const formattedTimings = values.timings.map(time => time.format("HH:mm"));
             const res = await axios.post("http://localhost:3002/user/apply-doctor", 
             {...values, 
                 userId:user._id,
-                timings:[
-                    moment(values.timings[0]).format("HH:mm"),
-                    moment(values.timings[1]).format("HH:mm"),
-                ],
+                timings: formattedTimings
             },{
                 headers:{
                     Authorization: `Bearer ${localStorage.getItem('token')}`
@@ -53,38 +51,38 @@ const ApplyDoctor = () => {
                 <Row gutter={20} className='flex'>
                     <Col xs ={24} md = {24} lg = {8}>
                     <Form.Item label = "First Name" name = "firstName" required rules = {[{required:true}]}>
-                        <Input type = "text" placeholder='your first name'></Input>
+                        <Input type = "text" placeholder='Enter Your First Name'></Input>
                     </Form.Item>
                     </Col>
 
                     <Col xs ={24} md = {24} lg = {8}>
                     <Form.Item label = "Last Name" name = "lastName" required rules = {[{required:true}]}>
-                        <Input type = "text" placeholder='your last name'></Input>
+                        <Input type = "text" placeholder='Enter Your Last Name'></Input>
                     </Form.Item>
                     </Col>
 
                     <Col xs ={24} md = {24} lg = {8}>
                     <Form.Item label = "Phone No" name = "mobile" required rules = {[{required:true}]}>
-                        <Input type = "text" placeholder='your contant no'></Input>
+                        <Input type = "text" placeholder='Enter Your Contant No.'></Input>
                     </Form.Item>
                     </Col>
                 </Row>
                 <Row gutter={20}>
                     <Col xs ={24} md = {24} lg = {8}>
                     <Form.Item label = "Email" name = "email" required rules = {[{required:true}]}>
-                        <Input type = "email" placeholder='your email address'></Input>
+                        <Input type = "email" placeholder='Enter Your Email Address'></Input>
                     </Form.Item>
                     </Col>
 
                     <Col xs ={24} md = {24} lg = {8}>
                     <Form.Item label = "Website" name = "website" required rules = {[{required:true}]}>
-                        <Input type = "text" placeholder='your website'></Input>
+                        <Input type = "text" placeholder='Enter Your Website'></Input>
                     </Form.Item>
                     </Col>
 
                     <Col xs ={24} md = {24} lg = {8}>
                     <Form.Item label = "Address" name = "address" required rules = {[{required:true}]}>
-                        <Input type = "text" placeholder='your clinic address'></Input>
+                        <Input type = "text" placeholder='Enter Your Clinic Address'></Input>
                     </Form.Item>
                     </Col>
                 </Row>
@@ -93,18 +91,18 @@ const ApplyDoctor = () => {
                 <Row gutter = {20}>
                 <Col xs ={24} md = {24} lg = {8}>
                     <Form.Item label =  "Specialization" name = "specialization" required rules = {[{required:true}]}>
-                        <Input type = "text" placeholder='your specialization'></Input>
+                        <Input type = "text" placeholder='Enter Your Specialization'></Input>
                     </Form.Item>
                     </Col>
                     <Col xs ={24} md = {24} lg = {8}>
                     <Form.Item label =  "Experience" name = "experience" required rules = {[{required:true}]}>
-                        <Input type = "text" placeholder='your experience'></Input>
+                        <Input type = "text" placeholder='Enter Your Experience'></Input>
                     </Form.Item>
                     </Col>
 
                     <Col xs ={24} md = {24} lg = {8}>
                     <Form.Item label =  "Fees per consultation" name = "feesPerCunsaltation" required rules = {[{required:true}]}>
-                        <Input type = "text" placeholder='your fees'></Input>
+                        <Input type = "text" placeholder='Enter Your Fees'></Input>
                     </Form.Item>
                     </Col>
 

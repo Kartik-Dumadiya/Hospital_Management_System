@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import moment from "moment";
-import { Table } from "antd";
+import { Table, message } from "antd";
 import axios from "axios";
+import Navbar from "../../components/Navbar";
+import Footter from "../../components/Footter";
 
 const DoctorAppointments = () => {
   const [appointments, setAppointments] = useState([]);
@@ -13,9 +15,6 @@ const DoctorAppointments = () => {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
-        //   params:{
-            
-        //   }
         }
       );
 
@@ -31,49 +30,67 @@ const DoctorAppointments = () => {
     getAppointments();
   }, []);
 
+  const handleStatus = async(record, status)=> {
+    try {
+        console.log("iske uper")
+        const res = await axios.post('http://localhost:3002/doctor/update-status',{appointmentsId : record._id , status}, {
+          headers:{
+            Authorization : `Bearer ${localStorage.getItem('token')}`
+          }
+        })
+        console.log("iske niche")
+      if(res.data.success){
+        message.success(res.data.message);
+        getAppointments();
+      }
+    } catch (error) {
+      console.log('error', error);
+      message.error('Something went Wrong');
+    }
+  }
   const columns = [
     {
-      title: "ID",
-      dataIndex: "_id",
+        title: "Name",
+        dataIndex : "patientName",
     },
-    // {
-    //     title: "Name",
-    //     dataIndex : "name",
-    //     render: (text, record) => (
-    //         <span>
-    //             {record.doctorId.firstName} {record.doctorId.lastName}
-    //         </span>
-    //     )
-    // },
-    // {
-    //     title: "Phone",
-    //     dataIndex : "phone",
-    //     render: (text, record) => (
-    //         <span>
-    //             {record.doctorInfo.phone}
-    //         </span>
-    //     )
-    // },
     {
-      title: "Date & Time",
+      title: "Date",
       dataIndex: "date",
-      render: (text, record) => (
-        <span>
-          {moment(record.date).format("DD-MM-YYYY")} &nbsp;
-          {moment(record.time).format("HH:mm")}
-        </span>
-      ),
+    },
+    {
+      title: "Time",
+      dataIndex: "time",
     },
     {
       title: "Status",
-      dataIndex: "date",
+      dataIndex: "status",
+    },
+    {
+        title : "Actions",
+        dataIndex : 'actions',
+        render : (text, record) => (
+            <div className=" flex">
+                {record.status === "pending" && (
+                    <div className="flex gap-4">
+                        <button onClick={()=> handleStatus(record, "Approved")} className=" bg-[#3ca743] font-bold px-2 py-1 rounded-lg hover:bg-[#19173f] duration-100 ease-linear text-white">Approve</button>
+                        <button onClick={()=> handleStatus(record, "Reject")} className=" bg-[#f93e4b] font-bold px-4 py-1 rounded-lg hover:bg-[#19173f] duration-100 ease-linear text-white">Reject</button>
+                    </div>
+                )}
+            </div>
+        )
     },
   ];
   return (
-    <div>
-      <h1>Appointment List</h1>
-      <Table columns={columns} dataSource={appointments}></Table>
-    </div>
+    <>
+      <Navbar/>
+      <div className='p-10 bg-slate-100 h-[650px] flex flex-col'>
+          <div className=' bg-slate-200 py-3 rounded-lg text-2xl text-center font-bold font-mono w-[1420px] mx-auto'>Appointment List</div> 
+            <div className="p-5 mt-6 h-[500px]">
+              <Table columns={columns} dataSource={appointments}/>
+            </div>
+      </div>
+      <Footter/>
+    </>
   );
 };
 

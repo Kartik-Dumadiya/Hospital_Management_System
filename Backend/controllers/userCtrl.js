@@ -78,7 +78,8 @@ const authController = async (req, res) => {
 //apply doctor controller
 const applyDoctorController = async (req, res) => {
     try {
-        const newDoctor = await doctorModel({ ...req.body, status: 'pending' })
+        const newDoctor = await doctorModel({ ...req.body , status: 'pending' })
+        // console.log(req.body);
         await newDoctor.save()
         const adminUser = await userModel.findOne({ isAdmin: true })
         const notification = adminUser.notification
@@ -92,9 +93,9 @@ const applyDoctorController = async (req, res) => {
             }
         })
         await userModel.findByIdAndUpdate(adminUser._id, { notification })
-        res.status(201).send({
+        res.status(200).send({
             success: true,
-            message: 'Doctor Accoun Applied Successdully.'
+            message:'Doctor Account Applied Successfully.'
         })
     } catch (error) {
         console.log(error);
@@ -119,7 +120,7 @@ const getAllNotificationController = async (req, res) => {
         const updatedUser = await user.save();
         res.status(200).send({
             success: true,
-            message: "all notification marked as read",
+            message: "All notification Marked as Read",
             data: updatedUser,
         })
     } catch (error) {
@@ -150,7 +151,7 @@ const deleteAllNotificationController = async (req, res) => {
         console.log(error);
         res.status(500).send({
             success: false,
-            message: 'unable to delete all notification',
+            message: 'Unable to delete all notification',
             error
         })
     }
@@ -178,14 +179,13 @@ const getAllDoctorsController = async (req, res) => {
 //BOOK APPOINTMENT
 const bookAppointmentController = async (req, res) => {
     try {
-        req.body.date = moment(req.body.date, "DD-MM-YYYY").toISOString();
-        req.body.time = moment(req.body.time, "HH:mm").toISOString();
         req.body.status = "pending";
         const newAppointment = new appointmentModel(req.body);
+
         await newAppointment.save();
         const user = await userModel.findOne({ _id: req.body.doctorInfo.userId });
         user.notification.push({
-            type: "New-appointment-request",
+            type: "New-Appointment-request",
             message: `A new Appointment Request from ${req.body.userInfo.name}`,
             onCLickPath: "/user/appointments",
         });
@@ -207,27 +207,33 @@ const bookAppointmentController = async (req, res) => {
 // booking bookingAvailabilityController
 const bookingAvailabilityController = async (req, res) => {
     try {
-        const date = moment(req.body.date, "DD-MM-YYYY").toISOString();
-        const fromTime = moment(req.body.time, "HH:mm").subtract(1, "hours").toISOString();
-        const toTime = moment(req.body.time, "HH:mm").add(1, "hours").toISOString();
+        const date = req.body.date;
         const doctorId = req.body.doctorId;
+        const time = req.body.time;
+        const st = req.body.st;
+        const et = req.body.et;
+
+        if(time < st || time >= et){
+            return res.status(200).send({
+                message: "Please Select Valid Time",
+                success: false,
+            });
+        }
+
         const appointments = await appointmentModel.find({
             doctorId,
             date,
-            time: {
-                $gte: fromTime,
-                $lte: toTime,
-            },
-        });
+            time,
+        })
         if (appointments.length > 0) {
             return res.status(200).send({
-                message: "Appointments not Availibale at this time",
+                message: "Appointments Not Available At This time",
                 success: true,
             });
         } else {
             return res.status(200).send({
                 success: true,
-                message: "Appointments available",
+                message: "Appointments Available",
             });
         }
     } catch (error) {
@@ -243,7 +249,6 @@ const bookingAvailabilityController = async (req, res) => {
 const userAppointmentsController = async (req, res) => {
     try {
         const appointments = await appointmentModel.find({});
-        console.log("appointments are " + appointments);
         res.status(200).send({
             success: true,
             message: "Users Appointments Fetch Successfully",

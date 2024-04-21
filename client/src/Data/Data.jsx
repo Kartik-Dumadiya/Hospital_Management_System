@@ -10,10 +10,6 @@ export const userMenu = [
     {
         name: "Apply Doctor",
         path: "/apply-doctor",
-    },
-    {
-        name:"Profile",
-        path:"/profile"
     }
 ];
 
@@ -30,9 +26,5 @@ export const adminMenu = [
     {
         name:"Users",
         path:"/admin/users"
-    },
-    {
-        name:"Profile",
-        path:"/profile",
     }
 ];

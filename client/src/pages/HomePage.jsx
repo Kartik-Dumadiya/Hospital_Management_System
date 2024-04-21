@@ -3,14 +3,14 @@ import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footter from '../components/Footter';
 import homepg from "../../media/Homepg.svg";
-import { Link } from 'react-router-dom';
 import { Row } from 'antd';
 import DoctorList from '../components/DoctorList';
+import { useSelector } from 'react-redux';
 
 const HomePage = () => {
   let tag_style = "h-[360px] w-[320px] rounded-lg px-3 text-center bg-slate-200 flex flex-col";
   let tag_text = "font-bold text-[#2B2A29] text-xl leading-10";
-
+  const { user } = useSelector(state => state.user);
   const [doctors, setDoctors] = useState([])
   //login user data
   const getUserData = async() => {
@@ -20,6 +20,7 @@ const HomePage = () => {
           Authorization : `Bearer ${localStorage.getItem("token")}`,
         }
       }) ;
+      console.log(user);
       if( res.data.success) {
         setDoctors(res.data.data);
       }
@@ -40,21 +41,22 @@ const HomePage = () => {
                     <p className='text-white font-sans text-5xl p-1 font-bold'>Seamless Care, Effortless Management</p>
                     <div className='text-white font-sans text-5xl p-1 font-bold flex gap-3'><p>Your</p><p className=' text-orange-400'>Health</p><p>,Our Priority!</p></div>
                 </div>
-                <Link to='http:localhost:5173\appointments' className=' w-[250px] h-10 cursor-pointer flex text-[#28328C] justify-center font-bold items-center bg-orange-400 rounded-lg p-1 mr-3 hover:bg-[#FFC828] duration-200 ease-in'>
+                <a href='#appo' className=' w-[250px] h-10 cursor-pointer flex text-[#28328C] justify-center font-bold items-center bg-orange-400 rounded-lg p-1 mr-3 hover:bg-[#FFC828] duration-200 ease-in'>
                     Book Appointment Now !
-                </Link>
+                </a>
             </div>
        </div>
-       <div className='w-[89%] mx-auto bg-slate-200 rounded-lg mt-3'>
+       {<div className='w-[89%] mx-auto bg-slate-200 rounded-lg mt-3' id='appo'>
           <p className='w-full text-center text-4xl font-bold font-sans leading-[3.5rem] text-[#2B2A29] border-b border-slate-400'>Available Doctors</p>
           <Row className='flex gap-5 py-6 justify-center items-center overflow-auto'>
               {
                 doctors && doctors.map( doctor => (
                   <DoctorList doctor={doctor}/>
                 ))
+                
               }
           </Row>
-       </div>
+       </div>}
        <div className='flex flex-col'>
             <div className='p-6 m-auto w-[500px] text-center'>
                 <p className='text-5xl font-bold font-sans leading-[3.5rem] text-[#2B2A29]'>Providing the best medical services</p>
