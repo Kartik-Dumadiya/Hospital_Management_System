@@ -42,14 +42,29 @@ const Appointments = () => {
         {
             title: "Date",
             dataIndex : "date",
+            render: (text, record) => (
+                <span className=" text-lg">
+                    {record.date}
+                </span>
+            )
         },
         {
             title: "Time",
             dataIndex : "time",
+            render: (text, record) => (
+                <span className=" text-lg">
+                    {record.time}
+                </span>
+            )
         },
         {
             title: "Status",
             dataIndex : "status",
+            render: (text, record) => (
+                <span className={record.status === "Approved" ? "text-lg text-green-500" : "text-lg text-red-600" }>
+                    {record.status}
+                </span>
+            )
         }
     ]
     return (
