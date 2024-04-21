@@ -42,9 +42,9 @@ const HomePage = () => {
                     <p className='text-white font-sans text-5xl p-1 font-bold'>Seamless Care, Effortless Management</p>
                     <div className='text-white font-sans text-5xl p-1 font-bold flex gap-3'><p>Your</p><p className=' text-orange-400'>Health</p><p>,Our Priority!</p></div>
                 </div>
-                <a href='#appo' className=' w-[250px] h-10 cursor-pointer flex text-[#28328C] justify-center font-bold items-center bg-orange-400 rounded-lg p-1 mr-3 hover:bg-[#FFC828] duration-200 ease-in'>
+                {!isDoc && (<a href='#appo' className=' w-[250px] h-10 cursor-pointer flex text-[#28328C] justify-center font-bold items-center bg-orange-400 rounded-lg p-1 mr-3 hover:bg-[#FFC828] duration-200 ease-in'>
                     Book Appointment Now !
-                </a>
+                </a>)}
             </div>
        </div>
        {!isDoc && (<div className='w-[89%] mx-auto bg-slate-200 rounded-lg mt-3' id='appo'>
