@@ -50,31 +50,47 @@ const DoctorAppointments = () => {
   }
   const columns = [
     {
-        title: "Name",
+        title: "Patient's Name",
         dataIndex : "patientName",
+        render : (text, record) => (
+            <span className="text-lg">{record.patientName}</span>
+        )
     },
     {
       title: "Date",
       dataIndex: "date",
+      render : (text, record) => (
+        <span className="text-lg">{record.date}</span>
+    )
     },
     {
       title: "Time",
       dataIndex: "time",
+      render : (text, record) => (
+        <span className="text-lg">{record.time}</span>
+    )
     },
     {
       title: "Status",
       dataIndex: "status",
+      render: (text, record) => (
+        <span className={record.status === "Approved" ? "text-lg text-green-500" : "text-lg text-red-600" }>
+            {record.status}
+        </span>
+    ) 
     },
     {
         title : "Actions",
         dataIndex : 'actions',
         render : (text, record) => (
             <div className=" flex">
-                {record.status === "pending" && (
+                {record.status === "pending" ? (
                     <div className="flex gap-4">
                         <button onClick={()=> handleStatus(record, "Approved")} className=" bg-[#3ca743] font-bold px-2 py-1 rounded-lg hover:bg-[#19173f] duration-100 ease-linear text-white">Approve</button>
                         <button onClick={()=> handleStatus(record, "Reject")} className=" bg-[#f93e4b] font-bold px-4 py-1 rounded-lg hover:bg-[#19173f] duration-100 ease-linear text-white">Reject</button>
                     </div>
+                ) : (
+                  <span className="text-lg">No Actions</span>
                 )}
             </div>
         )
