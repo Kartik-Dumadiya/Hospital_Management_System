@@ -20,7 +20,12 @@ function App() {
   const {loading} = useSelector(state => state.alerts)
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true
+        }}
+      >
       {
         loading ? <Spinner/> :
         <Routes>
