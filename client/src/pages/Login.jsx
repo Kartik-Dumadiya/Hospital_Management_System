@@ -1,6 +1,7 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
 import homepg from '../../public/media/hero_bg.svg';
+import userImg from '../../public/media/user.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import { useDispatch } from 'react-redux';
