@@ -18,7 +18,7 @@ const ApplyDoctor = () => {
         try {
             dispatch(showLoading())
             const formattedTimings = values.timings.map(time => time.format("HH:mm"));
-            const res = await axios.post("http://localhost:3002/user/apply-doctor", 
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/apply-doctor`, 
             {...values, 
                 userId:user._id,
                 timings: formattedTimings

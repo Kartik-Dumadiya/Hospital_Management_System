@@ -10,7 +10,7 @@ const DoctorAppointments = () => {
   const getAppointments = async () => {
     try {
       const res = await axios.get(
-        "http://localhost:3002/doctor/doctor-appointments",
+        `${import.meta.env.VITE_API_URL}/doctor/doctor-appointments`,
         {
           headers: {
             Authorization: `Bearer ${localStorage.getItem("token")}`,
@@ -33,7 +33,7 @@ const DoctorAppointments = () => {
   const handleStatus = async(record, status)=> {
     try {
         console.log("iske uper")
-        const res = await axios.post('http://localhost:3002/doctor/update-status',{appointmentsId : record._id , status}, {
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/doctor/update-status`,{appointmentsId : record._id , status}, {
           headers:{
             Authorization : `Bearer ${localStorage.getItem('token')}`
           }

@@ -16,7 +16,7 @@ const Notification = () => {
     const handleMarkAllRead = async () => {
         try {
             dispatch(showLoading());
-            const res = await axios.post('http://localhost:3002/user/get-all-notification',
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/get-all-notification`,
                 { userId: user._id },
                 {
                     headers: {
@@ -41,7 +41,7 @@ const Notification = () => {
     const handleDeleteAllRead = async () => {
         try {
             dispatch(showLoading());
-            const res = await axios.post('http://localhost:3002/user/delete-all-notification',
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/delete-all-notification`,
                 { userId: user._id },
                 {
                     headers: {

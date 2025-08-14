@@ -18,7 +18,7 @@ const Profile = () => {
     //get Doctor Detail
     const getDoctorInfo = async() => {
         try {
-            const res = await axios.post('http://localhost:3002/doctor/getDoctorInfo',
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/doctor/getDoctorInfo`,
             {userId: params.id},
             {
                 headers:{
@@ -37,7 +37,7 @@ const Profile = () => {
 const handleFinish = async(values) => {
     try {
         dispatch(showLoading())
-        const res = await axios.post("http://localhost:3002/doctor/updateProfile", 
+        const res = await axios.post(`${import.meta.env.VITE_API_URL}/doctor/updateProfile`, 
         {...values, 
             userId:user._id, 
             timings:[

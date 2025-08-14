@@ -21,7 +21,7 @@ const Login = () => {
     const onSubmit = async(data) => {
         try {
             dispatch(showLoading())
-            const res = await axios.post('http://localhost:3002/user/login',data)
+            const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/login`,data)
             window.location.reload();
             dispatch(hideLoading())
             if(res.data.success){

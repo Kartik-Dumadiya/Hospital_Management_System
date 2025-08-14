@@ -10,7 +10,7 @@ const Appointments = () => {
     const [appointments, setAppointments] = useState([]);
     const getAppointments = async () => {
         try{
-            const res = await axios.get("http://localhost:3002/user/user-appointments", { 
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/user/user-appointments`, { 
                 headers: {
                     Authorization : `Bearer ${localStorage.getItem("token")}`,
                 },

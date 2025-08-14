@@ -24,3 +24,6 @@ dist-ssr
 *.sw?
 
 ../Backend/node_modules
+Backend/package-lock.json
+Backend/node_modules
+Backend/package-lock.json

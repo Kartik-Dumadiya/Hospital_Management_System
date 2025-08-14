@@ -11,7 +11,7 @@ export default function ProtectedRoute({children}) {
     const getUser = async() =>{
         try {
           dispatch(showLoading())
-          const res = await axios.post('http://localhost:3002/user/getUserData',
+          const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/getUserData`,
           { token : localStorage.getItem('token')},
           {
             headers:{

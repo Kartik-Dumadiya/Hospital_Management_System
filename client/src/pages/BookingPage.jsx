@@ -17,7 +17,7 @@ const BookingPage = () => {
   const getUserData = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:3002/doctor/getDoctorById",
+        `${import.meta.env.VITE_API_URL}/doctor/getDoctorById`,
         { doctorId: params.doctorId },
         {
           headers: {
@@ -42,7 +42,7 @@ const BookingPage = () => {
     try {
       dispatch(showLoading());
       const res = await axios.post(
-        "http://localhost:3002/user/booking-availbility",
+        `${import.meta.env.VITE_API_URL}/user/booking-availbility`,
         {
           doctorId: params.doctorId,
           date: date.format("DD-MM-YYYY"),
@@ -86,7 +86,7 @@ const BookingPage = () => {
         dispatch(showLoading());
         console.log(user);
         const res = await axios.post(
-          "http://localhost:3002/user/book-appointment",
+          `${import.meta.env.VITE_API_URL}/user/book-appointment`,
           {
             userId: user._id,
             patientName: user.username,

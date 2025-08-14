@@ -20,7 +20,7 @@ const Register = () => {
     const onSubmit = async(data) => {
         try {
             dispatch(showLoading());
-            const res = await axios.post('http://localhost:3002/user/register', data);
+            const res = await axios.post('${import.meta.env.VITE_API_URL}/user/register', data);
             dispatch(hideLoading());
             if(res.data.success){
                 message.success('Register Sucessfully!') 

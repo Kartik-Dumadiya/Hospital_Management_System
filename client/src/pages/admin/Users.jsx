@@ -10,7 +10,7 @@ const Users = () => {
   // Get Users
   const getUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:3002/admin/getAllUsers', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/admin/getAllUsers`, {
         headers: {
           Authorization: `Bearer ${localStorage.getItem('token')}`,
         },

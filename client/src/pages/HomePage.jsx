@@ -16,7 +16,7 @@ const HomePage = () => {
   //login user data
   const getUserData = async() => {
     try {
-      const res = await axios.post("http://localhost:3002/user/getAllDoctors",{},{
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/user/getAllDoctors`,{},{
         headers :{
           Authorization : `Bearer ${localStorage.getItem("token")}`,
         }
