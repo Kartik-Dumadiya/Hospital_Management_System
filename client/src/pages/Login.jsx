@@ -41,11 +41,11 @@ const Login = () => {
         <div style={{ backgroundImage: `url(${homepg})`, backgroundRepeat: "repeat", backgroundColor:"#040744",color:"#fffff" }} className='w-[100vw] h-[100vh] flex justify-center items-center'>
                 <div className='bg-white min-h-[500px] min-w-[400px] m-auto border-[2px] rounded-lg pb-5'>
                     <div className='font-bold text-2xl text-center p-4 underline underline-offset-8'>Login</div>
-                    <form /*method="POST"*/ className='mt-4 flex flex-col gap-6' onSubmit={handleSubmit(onSubmit)}>
+                    <form className='mt-4 flex flex-col gap-6' onSubmit={handleSubmit(onSubmit)}>
 
                         <div className='flex flex-col'>
                             <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                <img src="../../public/media/user.png" alt="Name" className='h-[25px] w-[25px] ml-2' />
+                                <img src={userImg} alt="Name" className='h-[25px] w-[25px] ml-2' />
                                 <input required type="text" placeholder='Username' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                     {...register("username", {
                                         required: {
@@ -59,7 +59,7 @@ const Login = () => {
                         </div>
                         <div className='flex flex-col'>
                             <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                <img src="../../public/media/key.png" alt="Password" className='h-[25px] w-[25px] ml-2' />
+                                <img src={keyImg} alt="Password" className='h-[25px] w-[25px] ml-2' />
                                 <input type="password" placeholder='Password' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                     {...register("password", {
                                         required: {

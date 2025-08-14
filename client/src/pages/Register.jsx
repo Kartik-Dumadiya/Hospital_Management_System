@@ -6,6 +6,10 @@ import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { showLoading, hideLoading } from '../redux/features/alertSlice';
 import axios from 'axios';
+import nameImg from '../../public/media/name.png';
+import telephoneImg from '../../public/media/telephone.png';
+import userImg from '../../public/media/user.png';
+import keyImg from '../../public/media/key.png';
 
 const Register = () => {
     const navigate = useNavigate();
@@ -36,14 +40,14 @@ const Register = () => {
     }
     return (
         <div style={{ backgroundImage: `url(${homepg})`, backgroundRepeat: "repeat", backgroundColor:"#040744",color:"#fffff" }} className='w-[100vw] h-[100vh] flex justify-center items-center'>
-                <div className='bg-white min-h-[500px] min-w-[400px] m-auto border-[2px] rounded-lg pb-5'>
-                    <div className='font-bold text-2xl text-center p-4 underline underline-offset-8'>Register</div>
-                    <form className='mt-4 flex flex-col gap-6' onSubmit={handleSubmit(onSubmit)}>
-
+            <div className='bg-white min-h-[500px] min-w-[400px] m-auto border-[2px] rounded-lg pb-5'>
+                <div className='font-bold text-2xl text-center p-4 underline underline-offset-8'>Register</div>
+                <form className='mt-4 flex flex-col gap-6' onSubmit={handleSubmit(onSubmit)}>
+                    <div className='flex flex-col'></div>
                         
                             <div className='flex flex-col'>
                                 <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                    <img src="../../public/media/name.png" alt="Name" className='h-[25px] w-[25px] ml-2' />
+                                    <img src={nameImg} alt="Name" className='h-[25px] w-[25px] ml-2' />
                                     <input type="text" placeholder='Name' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                         {...register("name", {
                                             required: {
@@ -59,7 +63,7 @@ const Register = () => {
 
                             <div className='flex flex-col'>
                                 <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                    <img src="../../public/media/telephone.png" alt="mobile" className='h-[20px] w-[20px] ml-3' />
+                                    <img src={telephoneImg} alt="mobile" className='h-[20px] w-[20px] ml-3' />
                                     <input type="number" placeholder='Mobile Number' className='w-[250px] h-full bg-[transparent] px-2 rounded-md remove-arrow' style={{ border: "none", outline: "none" }}
                                         {...register("mobile", {
                                             required: {
@@ -82,7 +86,7 @@ const Register = () => {
                 
                         <div className='flex flex-col'>
                             <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                <img src="../../public/media/user.png" alt="Name" className='h-[25px] w-[25px] ml-2' />
+                                <img src={userImg} alt="Name" className='h-[25px] w-[25px] ml-2' />
                                 <input required type="text" placeholder='Username' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                     {...register("username", {
                                         required: {
@@ -96,7 +100,7 @@ const Register = () => {
                         </div>
                         <div className='flex flex-col'>
                             <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                <img src="../../public/media/key.png" alt="Password" className='h-[25px] w-[25px] ml-2' />
+                                <img src={keyImg} alt="Password" className='h-[25px] w-[25px] ml-2' />
                                 <input type="password" placeholder='Password' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                     {...register("password", {
                                         required: {

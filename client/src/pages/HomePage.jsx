@@ -66,17 +66,17 @@ const HomePage = () => {
 
             <div className='w-full p-10 flex justify-around'>
                 <div className={tag_style}>
-                    <img src="client/public/media/find_doc.png" alt="Find Doc" className='h-[200px] w-[220px] mx-auto'/>
+                    <img src={findDocImg} alt="Find Doc" className='h-[200px] w-[220px] mx-auto'/>
                     <p className={tag_text}>Find a Doctor</p>
                     <p className='font-sans text-[#2B2A29]'>World-class care for evertyone. Our health System offers unmatched, expert health care.From the lab to the clinic.</p>
                 </div>
                 <div className={tag_style}>
-                    <img src="client/public/media/know_doc.png" alt="Find Doc" className='h-[200px] w-[220px] mx-auto'/>
+                    <img src={knowDocImg} alt="Find Doc" className='h-[200px] w-[220px] mx-auto'/>
                     <p className={tag_text}>Find a Location</p>
                     <p className='font-sans text-[#2B2A29]'>World-class care for evertyone. Our health System offers unmatched, expert health care.From the lab to the clinic.</p>
                 </div>
                 <div className={tag_style}>
-                    <img src="client/public/media/book_doc.png" alt="Find Doc" className='h-[200px] w-[200px] mx-auto mt-1'/>
+                    <img src={bookDocImg} alt="Find Doc" className='h-[200px] w-[200px] mx-auto mt-1'/>
                     <p className={tag_text}>Book an Appoointment</p>
                     <p className='font-sans text-[#2B2A29]'>World-class care for evertyone. Our health System offers unmatched, expert health care.From the lab to the clinic.</p>
                 </div>

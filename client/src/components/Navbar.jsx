@@ -5,6 +5,9 @@ import { adminMenu, userMenu } from '../Data/Data';
 import { message, Badge} from 'antd';
 import noti from '../../public/media/noti_icon.webp';
 import logo from '../../public/media/logo.webp'
+import logoutIcon from '../../public/media/logout_.png';
+import userProfileIcon from '../../public/media/user_profile.png';
+import profileLogo from '../../public/media/Profile_logo.png';
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -60,16 +63,16 @@ const Navbar = () => {
                       <img src={noti} alt="N" className='h-[20px] w-[20px]'/>
                     </Badge>
                     <Link to="/login" onClick={handleLogout} className='cursor-pointer flex items-center bg-orange-400 rounded-lg hover:bg-red-500 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
-                        <img src={"../../public/media/logout_.png"} className='h-[20px] w-[20px]' />
+                        <img src={logoutIcon} className='h-[20px] w-[20px]' />
                         <p>Logout</p>
                     </Link>
                     <div className='cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 hover:bg-orange-100 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
-                        <img src="../../public/media/user_profile.png" alt="Name" className='h-[20px] w-[20px]' />
+                        <img src={userProfileIcon} alt="Name" className='h-[20px] w-[20px]' />
                         <p>{user.name}</p>
                     </div>
                   </div> : 
           <Link to="/login/patient" className=' cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 mr-3 hover:bg-orange-100 duration-200 ease-in'>
-              <img src="client/public/media/Profile_logo.png" alt="Logo" className=' h-6'/>
+              <img src={profileLogo} alt="Logo" className=' h-6'/>
               <p>Login/Register</p>
           </Link>
         }
