@@ -3,8 +3,8 @@ import { Link , useNavigate, useLocation} from 'react-router-dom';
 import { useDispatch, useSelector} from 'react-redux';
 import { adminMenu, userMenu } from '../Data/Data';
 import { message, Badge} from 'antd';
-import noti from '../../media/noti_icon.webp';
-import logo from '../../media/logo.webp'
+import noti from '../../public/media/noti_icon.webp';
+import logo from '../../public/media/logo.webp'
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -69,7 +69,7 @@ const Navbar = () => {
                     </div>
                   </div> : 
           <Link to="/login/patient" className=' cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 mr-3 hover:bg-orange-100 duration-200 ease-in'>
-              <img src="..\media\Profile_logo.png" alt="Logo" className=' h-6'/>
+              <img src="client/public/media/Profile_logo.png" alt="Logo" className=' h-6'/>
               <p>Login/Register</p>
           </Link>
         }

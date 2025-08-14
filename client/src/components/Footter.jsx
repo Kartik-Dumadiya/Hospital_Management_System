@@ -8,17 +8,17 @@ const Footter = () => {
     <div className='w-[100%] bg-[#060822] h-72 flex'>
       <div className='bg-[#060822] h-18 flex relative flex-col w-[250px]  h-[90px] mt-4 ml-4'>
         <div className=' cursor-pointer bg-[#060822] flex justify-start relative w-[250px]'>
-            <img src="..\media\logo.png" alt="Logo" className='w-[150px]'/>
+            <img src="client/public/media/logo.png" alt="Logo" className='w-[150px]'/>
             <p className=' fondamento-regular text-white text-3xl font-bold absolute bottom-3 right-[3.3rem]'>.Care</p>
         </div>
         <div className='absolute bottom-2 left-5'>
             <div className='text-white font-sans text-lg flex gap-3'><p>Your</p><p className=' text-orange-400'>Health</p><p>,Our Priority!</p></div>
         </div>
         <div className='flex gap-[0.6rem] pl-5 pt-4'>
-            <img src="..\media\linkedin.svg" alt="Ln" className={social}/>
-            <img src="..\media\instagram.svg" alt="Ins" className={social}/>
-            <img src="..\media\Microsoft.svg" alt="Mic" className={social}/>
-            <img src="..\media\twitter.svg" alt="Twi" className={social}/>
+            <img src="client/public/media/linkedin.svg" alt="Ln" className={social}/>
+            <img src="client/public/media/instagram.svg" alt="Ins" className={social}/>
+            <img src="client/public/media/Microsoft.svg" alt="Mic" className={social}/>
+            <img src="client/public/media/twitter.svg" alt="Twi" className={social}/>
         </div>
       </div>
 
