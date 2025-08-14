@@ -1,9 +1,9 @@
 import React from 'react'
-import logo from '../public/media/logo.png';
-import linkedin from '../public/media/linkedin.svg';
-import instagram from '../public/media/instagram.svg';
-import microsoft from '../public/media/Microsoft.svg';
-import twitter from '../public/media/twitter.svg';
+import logo from "../../public/media/logo.png"
+import linkedin from '../../public/media/linkedin.svg';
+import instagram from '../../public/media/instagram.svg';
+import microsoft from '../../public/media/Microsoft.svg';
+import twitter from '../../public/media/twitter.svg';
 
 const Footter = () => {
     let social = "h-[1.5rem] w-[1.5rem] cursor-pointer";
