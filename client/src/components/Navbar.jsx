@@ -60,11 +60,11 @@ const Navbar = () => {
                       <img src={noti} alt="N" className='h-[20px] w-[20px]'/>
                     </Badge>
                     <Link to="/login" onClick={handleLogout} className='cursor-pointer flex items-center bg-orange-400 rounded-lg hover:bg-red-500 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
-                        <img src={"../../media/logout_.png"} className='h-[20px] w-[20px]' />
+                        <img src={"../../public/media/logout_.png"} className='h-[20px] w-[20px]' />
                         <p>Logout</p>
                     </Link>
                     <div className='cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 hover:bg-orange-100 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
-                        <img src="../../media/user_profile.png" alt="Name" className='h-[20px] w-[20px]' />
+                        <img src="../../public/media/user_profile.png" alt="Name" className='h-[20px] w-[20px]' />
                         <p>{user.name}</p>
                     </div>
                   </div> : 

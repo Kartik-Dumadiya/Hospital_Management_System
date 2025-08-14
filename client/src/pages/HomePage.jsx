@@ -2,7 +2,7 @@ import React,{useEffect, useState} from 'react';
 import axios from 'axios';
 import Navbar from '../components/Navbar';
 import Footter from '../components/Footter';
-import homepg from "../../media/Homepg.svg";
+import homepg from "../../public/media/Homepg.svg";
 import { Row } from 'antd';
 import DoctorList from '../components/DoctorList';
 import { useSelector } from 'react-redux';

@@ -1,7 +1,7 @@
 import React from 'react'
 import { message} from 'antd';
 import {useForm} from 'react-hook-form'
-import homepg from '../../media/hero_bg.svg';
+import homepg from '../../public/media/hero_bg.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { showLoading, hideLoading } from '../redux/features/alertSlice';
@@ -43,7 +43,7 @@ const Register = () => {
                         
                             <div className='flex flex-col'>
                                 <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                    <img src="../../media/name.png" alt="Name" className='h-[25px] w-[25px] ml-2' />
+                                    <img src="../../public/media/name.png" alt="Name" className='h-[25px] w-[25px] ml-2' />
                                     <input type="text" placeholder='Name' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                         {...register("name", {
                                             required: {
@@ -59,7 +59,7 @@ const Register = () => {
 
                             <div className='flex flex-col'>
                                 <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                    <img src="../../media/telephone.png" alt="mobile" className='h-[20px] w-[20px] ml-3' />
+                                    <img src="../../public/media/telephone.png" alt="mobile" className='h-[20px] w-[20px] ml-3' />
                                     <input type="number" placeholder='Mobile Number' className='w-[250px] h-full bg-[transparent] px-2 rounded-md remove-arrow' style={{ border: "none", outline: "none" }}
                                         {...register("mobile", {
                                             required: {
@@ -82,7 +82,7 @@ const Register = () => {
                 
                         <div className='flex flex-col'>
                             <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                <img src="../../media/user.png" alt="Name" className='h-[25px] w-[25px] ml-2' />
+                                <img src="../../public/media/user.png" alt="Name" className='h-[25px] w-[25px] ml-2' />
                                 <input required type="text" placeholder='Username' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                     {...register("username", {
                                         required: {
@@ -96,7 +96,7 @@ const Register = () => {
                         </div>
                         <div className='flex flex-col'>
                             <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                <img src="../../media/key.png" alt="Password" className='h-[25px] w-[25px] ml-2' />
+                                <img src="../../public/media/key.png" alt="Password" className='h-[25px] w-[25px] ml-2' />
                                 <input type="password" placeholder='Password' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                     {...register("password", {
                                         required: {

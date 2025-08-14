@@ -1,6 +1,6 @@
 import React from 'react'
 import {useForm} from 'react-hook-form'
-import homepg from '../../media/hero_bg.svg';
+import homepg from '../../public/media/hero_bg.svg';
 import { Link, useNavigate } from 'react-router-dom';
 import { message } from 'antd';
 import { useDispatch } from 'react-redux';
@@ -45,7 +45,7 @@ const Login = () => {
 
                         <div className='flex flex-col'>
                             <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                <img src="../../media/user.png" alt="Name" className='h-[25px] w-[25px] ml-2' />
+                                <img src="../../public/media/user.png" alt="Name" className='h-[25px] w-[25px] ml-2' />
                                 <input required type="text" placeholder='Username' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                     {...register("username", {
                                         required: {
@@ -59,7 +59,7 @@ const Login = () => {
                         </div>
                         <div className='flex flex-col'>
                             <div className='flex h-[40px] bg-[#eaeaea] border-[2px] w-[320px] rounded m-auto justify-start items-center gap-5'>
-                                <img src="../../media/key.png" alt="Password" className='h-[25px] w-[25px] ml-2' />
+                                <img src="../../public/media/key.png" alt="Password" className='h-[25px] w-[25px] ml-2' />
                                 <input type="password" placeholder='Password' className='w-[250px] h-full bg-[transparent] px-2 rounded-md' style={{ border: "none", outline: "none" }}
                                     {...register("password", {
                                         required: {
