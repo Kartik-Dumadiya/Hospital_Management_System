@@ -13,7 +13,7 @@ config();
 connectDB();
 
 app.use(cors({
-    origin: process.env.FRONTEND_URL || "*", // For local: "*", for prod: your Vercel URL
+    origin: "https://hospital-management-system-iota-bay.vercel.app",
     credentials: true
 }));
 
