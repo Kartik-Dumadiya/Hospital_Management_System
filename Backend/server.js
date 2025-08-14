@@ -9,13 +9,13 @@ import adminRouter from './routes/adminRoutes.js';
 import doctorRouter from './routes/doctorRoutes.js';
 
 const app = express();
-//dotenv config
 config();
-//mongodb connection
 connectDB();
 
-//rest object
-app.use(cors());
+app.use(cors({
+    origin: process.env.FRONTEND_URL || "*", // For local: "*", for prod: your Vercel URL
+    credentials: true
+}));
 
 //middlewares
 app.use(express.json())
@@ -26,12 +26,15 @@ app.use("/user", userRouter)
 app.use("/admin", adminRouter);
 app.use("/doctor", doctorRouter);
 
-
+// Default route for health check
+app.get("/", (req, res) => {
+    res.send("Hospital Management Backend is running 🚑");
+});
 //POrt
-const port = 3002;
+const port = process.env.PORT || 3002;
 //listen port
 app.listen(port, ()=>{
-    console.log(`Server Running in ${process.env.NODE_MODE} Mode on port ${process.env.PORT}`.cyan.yellow)
+    console.log(`Server Running in ${process.env.NODE_MODE} Mode on port ${port}`.cyan.yellow)
 })
 
 
