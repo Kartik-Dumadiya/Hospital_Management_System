@@ -39,10 +39,10 @@ const Navbar = () => {
 
   const menuBar = user?.isAdmin ? adminMenu : user?.isDoctor ? doctorMenu : userMenu;
   return (
-    <div className=' w-full bg-[#28328C] h-16 flex items-center justify-between'>
+    <div className='w-full bg-[#28328C] h-16 flex items-center justify-between'>
         <Link to="\" className=' cursor-pointer bg-[#28328C] h-full flex justify-start relative w-[200px]'>
           <img src={logo} alt="Logo" className=' h-full'/>
-          <p className=' fondamento-regular text-white text-3xl font-bold absolute bottom-2 right-5'>.Care</p>
+          <p className='fondamento-regular text-white text-3xl font-bold absolute bottom-2 right-16'>.Care</p>
         </Link>
 
         <div className="h-full">
@@ -59,7 +59,7 @@ const Navbar = () => {
                     <Badge count={user && user.notification.length} onClick={()=>{ navigate('/notification')}} className='cursor-pointer flex items-center bg-yellow-400 rounded-lg p-1 hover:bg-yellow-500 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
                       <img src={noti} alt="N" className='h-[20px] w-[20px]'/>
                     </Badge>
-                    <Link to="/login" onClick={handleLogout} className='cursor-pointer flex items-center bg-orange-400 rounded-lg p-1 hover:bg-red-500 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
+                    <Link to="/login" onClick={handleLogout} className='cursor-pointer flex items-center bg-orange-400 rounded-lg hover:bg-red-500 duration-200 ease-in py-2 px-3 gap-4 font-bold'>
                         <img src={"../../media/logout_.png"} className='h-[20px] w-[20px]' />
                         <p>Logout</p>
                     </Link>

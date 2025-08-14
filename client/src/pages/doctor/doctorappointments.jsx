@@ -102,7 +102,7 @@ const DoctorAppointments = () => {
       <div className='p-10 bg-slate-100 h-[650px] flex flex-col'>
           <div className=' bg-slate-200 py-3 rounded-lg text-2xl text-center font-bold font-mono w-[1420px] mx-auto'>Appointment List</div> 
             <div className="p-5 mt-6 h-[500px]">
-              <Table columns={columns} dataSource={appointments}/>
+              <Table columns={columns} dataSource={appointments} rowKey={(record) => record._id}/>
             </div>
       </div>
       <Footter/>

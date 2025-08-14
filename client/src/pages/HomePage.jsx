@@ -52,7 +52,7 @@ const HomePage = () => {
           <Row className='flex gap-5 py-6 justify-center items-center overflow-auto'>
               {
                 doctors && doctors.map( doctor => (
-                  <DoctorList doctor={doctor}/>
+                  <DoctorList key={doctor._id} doctor={doctor}/>
                 ))
                 
               }
