@@ -14,7 +14,7 @@ import Doctors from './pages/admin/Doctors'
 import Profile from './pages/doctor/Profile'
 import BookingPage from './pages/BookingPage';
 import Appointments from './pages/Appointments';
-import DoctorAppointments from './pages/doctor/DoctorAppointments'
+import DoctorAppointments from './pages/doctor/doctorappointments'
 
 function App() {
   const {loading} = useSelector(state => state.alerts)
